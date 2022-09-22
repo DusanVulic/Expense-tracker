@@ -11,14 +11,63 @@ import ManageExpense from "./screens/ManageExpense";
 import RecentExpenses from "./screens/RecentExpenses";
 import AllExpenses from "./screens/AllExpenses";
 
+///importing styles
+import { GlobalStyles } from "./constants/styles";
+
+//importing icons
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
 const ExpensesOverview = () => {
   return (
-    <BottomTabs.Navigator>
-      <BottomTabs.Screen name="RecentExpenses" component={RecentExpenses} />
-      <BottomTabs.Screen name="AllExpenses" component={AllExpenses} />
+    <BottomTabs.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
+        headerTintColor: "green",
+        tabBarStyle: {
+          backgroundColor: GlobalStyles.colors.primary500,
+          height: 60,
+        },
+        tabBarActiveTintColor: "green",
+        tabStyle: {
+          fontSize: 30,
+        },
+      }}
+    >
+      <BottomTabs.Screen
+        name="RecentExpenses"
+        component={RecentExpenses}
+        options={{
+          title: "Recent Expenses",
+          tabBarLabel: "Recent",
+          tabBarIcon: ({ size, focused }) => (
+            <Entypo
+              name="back-in-time"
+              color={focused ? "green" : "gray"}
+              size={32}
+            />
+          ),
+        }}
+      />
+      <BottomTabs.Screen
+        name="AllExpenses"
+        component={AllExpenses}
+        options={{
+          title: "All Expenses",
+          tabBarLabel: "All expenses",
+          tabBarIcon: ({ size, focused }) => (
+            <Entypo
+              name="calendar"
+              color={focused ? "green" : "gray"}
+              size={35}
+            />
+          ),
+        }}
+      />
     </BottomTabs.Navigator>
   );
 };
@@ -29,7 +78,11 @@ export default function App() {
       <StatusBar style="auto" />
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="ExpenseOverView" component={ExpensesOverview} />
+          <Stack.Screen
+            name="ExpenseOverView"
+            component={ExpensesOverview}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen name="ManageExpense" component={ManageExpense} />
         </Stack.Navigator>
       </NavigationContainer>
