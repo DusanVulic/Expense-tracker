@@ -30,12 +30,12 @@ const ExpensesOverview = () => {
         headerTintColor: "green",
         tabBarStyle: {
           backgroundColor: GlobalStyles.colors.primary500,
-          height: 60,
+          height: 70,
+          padding: 10,
         },
+        tabBarLabelStyle: { fontSize: 14, marginBottom: 5 },
+
         tabBarActiveTintColor: "green",
-        tabStyle: {
-          fontSize: 30,
-        },
       }}
     >
       <BottomTabs.Screen
