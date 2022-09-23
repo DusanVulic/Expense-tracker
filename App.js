@@ -48,7 +48,7 @@ const ExpensesOverview = () => {
             <Entypo
               name="back-in-time"
               color={focused ? "green" : "gray"}
-              size={32}
+              size={30}
             />
           ),
         }}
