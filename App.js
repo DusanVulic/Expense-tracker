@@ -15,9 +15,8 @@ import AllExpenses from "./screens/AllExpenses";
 import { GlobalStyles } from "./constants/styles";
 
 //importing icons
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
+import IconButton from "./UI/IconButton";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -36,6 +35,14 @@ const ExpensesOverview = () => {
         tabBarLabelStyle: { fontSize: 14, marginBottom: 5 },
 
         tabBarActiveTintColor: "green",
+        headerRight: () => (
+          <IconButton
+            icon="squared-plus"
+            size={32}
+            color="green"
+            onPress={() => {}}
+          />
+        ),
       }}
     >
       <BottomTabs.Screen
