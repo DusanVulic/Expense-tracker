@@ -5,6 +5,8 @@ import { View, StyleSheet } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import Button from "../UI/Button";
 import { ExpensesContext } from "../store/expenses-context";
+//expense form component
+import ExpenseForm from "../components/ExpenseForm";
 
 const ManageExpense = ({ route, navigation }) => {
   const expenseCtx = useContext(ExpensesContext);
@@ -45,6 +47,7 @@ const ManageExpense = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
+      <ExpenseForm />
       <View style={styles.buttonContainer}>
         <Button style={styles.button} mode="flat" onPress={cancelHandler}>
           Cancel
