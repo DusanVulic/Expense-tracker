@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useContext } from "react";
 
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 //icons
 import { FontAwesome5 } from "@expo/vector-icons";
 import Button from "../UI/Button";
