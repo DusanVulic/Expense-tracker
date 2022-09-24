@@ -5,6 +5,7 @@ import ExpenseItem from "./ExpenseItem";
 const ExpensesList = ({ expenses }) => {
   return (
     <FlatList
+      showsVerticalScrollIndicator={false}
       data={expenses}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => {
