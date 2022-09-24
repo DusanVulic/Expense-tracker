@@ -89,7 +89,6 @@ const styles = StyleSheet.create({
   deleteContainer: {
     marginTop: 16,
     paddingTop: 16,
-
     borderTopColor: "gray",
     borderTopWidth: 1,
     alignItems: "center",

@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     borderWidth: 1,
     borderColor: "green",
-    fontSize: 18,
+    fontSize: 16,
   },
 
   inputMultiline: {
