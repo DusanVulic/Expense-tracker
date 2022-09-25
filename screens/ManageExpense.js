@@ -7,6 +7,7 @@ import Button from "../UI/Button";
 import { ExpensesContext } from "../store/expenses-context";
 //expense form component
 import ExpenseForm from "../components/ExpenseForm";
+import { storeExpense } from "../util/http";
 
 const ManageExpense = ({ route, navigation }) => {
   const expenseCtx = useContext(ExpensesContext);
@@ -36,6 +37,7 @@ const ManageExpense = ({ route, navigation }) => {
     if (isEditing) {
       expenseCtx.updateExpense(editedExpenseId, expenseData);
     } else {
+      storeExpense(expenseData);
       expenseCtx.addExpense(expenseData);
     }
     navigation.goBack();
