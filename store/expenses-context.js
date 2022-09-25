@@ -43,8 +43,7 @@ export const ExpensesContext = createContext();
 
 const expensesReducer = (state, action) => {
   if (action.type === "ADD") {
-    const id = new Date().toString() + Math.random().toString();
-    return [...state, { ...action.payload, id }];
+    return [action.payload, ...state];
   }
   if (action.type === "UPDATE") {
     const updatebleExpenseIndex = state.findIndex(
@@ -61,7 +60,9 @@ const expensesReducer = (state, action) => {
     return state.filter((expense) => expense.id !== action.payload);
   }
   if (action.type === "SET") {
-    return action.payload;
+    const inverted = action.payload.reverse();
+
+    return inverted;
   }
   return state;
 };
