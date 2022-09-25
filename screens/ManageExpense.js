@@ -9,11 +9,14 @@ import { ExpensesContext } from "../store/expenses-context";
 import ExpenseForm from "../components/ExpenseForm";
 import { deleteExpense, storeExpense, updateExpense } from "../util/http";
 import LoadingOverlay from "../UI/LoadingOverlay";
+import ErrorOverlay from "../UI/ErrorOverlay";
 
 const ManageExpense = ({ route, navigation }) => {
   const expenseCtx = useContext(ExpensesContext);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [error, setError] = useState();
   const editedExpenseId = route.params?.expenseId;
   const isEditing = !!editedExpenseId;
 
@@ -29,9 +32,15 @@ const ManageExpense = ({ route, navigation }) => {
 
   const deleteExpenseHandler = async () => {
     setIsSubmitting(true);
-    await deleteExpense(editedExpenseId);
-    expenseCtx.deleteExpense(editedExpenseId);
-    navigation.goBack();
+
+    try {
+      await deleteExpense(editedExpenseId);
+      expenseCtx.deleteExpense(editedExpenseId);
+      navigation.goBack();
+    } catch (error) {
+      setError("could not delete expense, please try later");
+      setIsSubmitting(false);
+    }
   };
 
   const cancelHandler = () => {
@@ -39,18 +48,28 @@ const ManageExpense = ({ route, navigation }) => {
   };
   const confirmHandler = async (expenseData) => {
     setIsSubmitting(true);
-    if (isEditing) {
-      expenseCtx.updateExpense(editedExpenseId, expenseData);
-      await updateExpense(editedExpenseId, expenseData);
-    } else {
-      const id = await storeExpense(expenseData);
-      expenseCtx.addExpense({ ...expenseData, id: id });
+
+    try {
+      if (isEditing) {
+        expenseCtx.updateExpense(editedExpenseId, expenseData);
+        await updateExpense(editedExpenseId, expenseData);
+      } else {
+        const id = await storeExpense(expenseData);
+        expenseCtx.addExpense({ ...expenseData, id: id });
+      }
+      navigation.goBack();
+    } catch (error) {
+      setError("could not save data, please try again later");
+      setIsSubmitting(false);
     }
-    navigation.goBack();
+  };
+
+  const errorHandler = () => {
+    setError(null);
   };
 
   if (isSubmitting) {
-    return <LoadingOverlay />;
+    return <LoadingOverlay messager={error} />;
   }
 
   return (
